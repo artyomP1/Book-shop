@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Bookshop</title>
+</head>
+
+<body onload="onInit()">
+
+    <h1>Welcome to my bookshop</h1>
+    <div class="bg"></div>
+    <div class="modal">
+        <h1>Book Details</h1>
+        <div class="details">
+            <div class="img"></div>
+            <h3 class="about"></h3>
+            <div class="rate">
+
+            </div>
+        </div>
+        <button class="close-modal" onclick="closeDetails()">close</button>
+    </div>
+    <div>
+        <table class="books-table">
+            <tbody class="books">
+
+            </tbody>
+        </table>
+        <div class="add-book">
+        <h3>create new book</h3>
+        <input class="name" type="text" placeholder="Enter book name"/>
+        <input class="book-price" type="text" placeholder="price" style="width: 50px;"/>
+        <button class="add" onclick="readAndAddNewBook()">Add </button>
+    </div>
+    </div>
+    <script src="js/util-service.js"></script>
+    <script src="js/book-service.js"></script>
+    <script src="js/book-controller.js"></script>
+
+</body>
+
+</html>
