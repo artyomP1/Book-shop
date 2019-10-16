@@ -2,27 +2,33 @@
 
 
 function onInit() {
+    createBooks();
+    doTrans();
     renderBooks();
 }
 
 
+
+
 function renderBooks() {
     var books = getBooks();
-    var strHTML = '<tr> <th onclick="onSortBy(1)" class="id" >Id</th> <th onclick="onSortBy(2)" class="title" >Title</th><th onclick="onSortBy(3)" class="price">Price</th><th class="action" colspan="3">Actions</th> </tr>'
-    var strHTMLs = books.map(function (book) {
+    var strHTML = '<tr> <th onclick="onSortBy(1)" class="id" data-trans="id">Id</th> <th onclick="onSortBy(2)" class="title" data-trans="title">Title</th><th onclick="onSortBy(3)" class="price" data-trans="price">Price</th><th class="action" data-trans="action" colspan="3">Actions</th> </tr>'
+    var strHTMLs = books.map(function(book) {
         var className = book.id;
         return `<tr class="${className}">
         <td> ${book.id} </td>
         <td> ${book.title} </td>
         <td> ${book.price} <span>$</span> </td>
-        <td><button class="read" onclick="showBookDetails(${book.id})" >Read </button> </td>
-        <td><button onclick="readAndUpdateBook(${book.id})" class="update">Update </button></td>
-        <td><button onclick="onDeleteBook(${book.id})" class="delete" >Delete </button></td>
+        <td><button class="read" data-trans="read" onclick="showBookDetails(${book.id})" >Read </button> </td>
+        <td><button data-trans="update" onclick="readAndUpdateBook(${book.id})" class="update">Update </button></td>
+        <td><button data-trans="delete" onclick="onDeleteBook(${book.id})" class="delete" >Delete </button></td>
                 </tr>`
     });
+
     strHTMLs.unshift(strHTML);
     var elTodoList = document.querySelector('.books');
     elTodoList.innerHTML = strHTMLs.join('');
+    doTrans();
 }
 
 
@@ -41,7 +47,7 @@ function readAndAddNewBook() {
 }
 
 function readAndUpdateBook(bookId) {
-    var price = +prompt('what is the new price?');
+    var price = +prompt(getTrans('what is the new price?'));
     updateBook(bookId, price);
     renderBooks()
 }
@@ -81,14 +87,14 @@ function rateUp(bookId) {
     var book = findCurrBook(bookId)
     if (book.rate === 10) return;
     book.rate++
-    document.querySelector('.rate-score').innerText = book.rate;
+        document.querySelector('.rate-score').innerText = book.rate;
 }
 
 function rateDwon(bookId) {
     var book = findCurrBook(bookId)
     if (book.rate === 0) return;
     book.rate--
-    document.querySelector('.rate-score').innerText = book.rate;
+        document.querySelector('.rate-score').innerText = book.rate;
 }
 
 function onSortBy(sortBy) {
@@ -100,4 +106,15 @@ function onSortBy(sortBy) {
         gBooks.sort((price1, price2) => (price1.price > price2.price) ? 1 : -1)
     }
     renderBooks();
-}  
+}
+
+function onSetLang(lang) {
+    setLang(lang);
+    if (lang === 'he') {
+        document.body.classList.add('rtl')
+    } else {
+        document.body.classList.remove('rtl')
+    }
+    doTrans();
+    renderBooks()
+}
