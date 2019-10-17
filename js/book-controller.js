@@ -18,7 +18,7 @@ function renderBooks() {
         return `<tr class="${className}">
         <td> ${book.id} </td>
         <td> ${book.title} </td>
-        <td> ${book.price} <span>$</span> </td>
+        <td> ${book.price} <span data-trans="currency">$</span> </td>
         <td><button class="read" data-trans="read" onclick="showBookDetails(${book.id})" >Read </button> </td>
         <td><button data-trans="update" onclick="readAndUpdateBook(${book.id})" class="update">Update </button></td>
         <td><button data-trans="delete" onclick="onDeleteBook(${book.id})" class="delete" >Delete </button></td>
@@ -116,5 +116,6 @@ function onSetLang(lang) {
         document.body.classList.remove('rtl')
     }
     doTrans();
+    chengCurr()
     renderBooks()
 }

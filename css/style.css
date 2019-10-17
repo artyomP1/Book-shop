@@ -16,6 +16,10 @@ body {
     margin-top: 100px;
 }
 
+th.price {
+    width: 65px;
+}
+
 body.rtl {
     direction: rtl;
 }

@@ -59,6 +59,14 @@ var gTrans = {
         en: 'Are you sure?',
         he: '?האם אתה בטוח ',
     },
+    'currency': {
+        en: '$',
+        he: '₪',
+    },
+    'close': {
+        en: 'close',
+        he: 'סגור',
+    },
 
 }
 
@@ -112,6 +120,22 @@ function formatNum(num) {
 function formatCurrency(num) {
     return new Intl.NumberFormat('he-IL', { style: 'currency', currency: 'ILS' }).format(num);
 }
+
+
+function chengCurr() {
+    if (gCurrLang === 'he') {
+        for (var i = 0; i < gBooks.length; i++) {
+            gBooks[i].price = (gBooks[i].price * 3.5).toFixed(2);
+        }
+
+    } else {
+        for (var i = 0; i < gBooks.length; i++) {
+            gBooks[i].price = (gBooks[i].price / 3.5).toFixed(2);
+        }
+    }
+
+}
+
 
 function formatDate(time) {
 
